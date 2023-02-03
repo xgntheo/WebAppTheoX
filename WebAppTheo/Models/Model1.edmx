@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DevTestTXModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telephone" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipement">
+          <Key>
+            <PropertyRef Name="IdEquipm" />
+          </Key>
+          <Property Name="IdEquipm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeEquipm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prix" Type="int" />
+        </EntityType>
+        <EntityType Name="Formulaire">
+          <Key>
+            <PropertyRef Name="IdForm" />
+          </Key>
+          <Property Name="IdForm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeMaintenance" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DateAjout" Type="datetime" Nullable="false" />
+          <Property Name="IdTech" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdEquipm" Type="int" Nullable="false" />
+          <Property Name="temps(min)" Type="int" />
+          <Property Name="Prix" Type="int" />
+        </EntityType>
+        <EntityType Name="Technicien">
+          <Key>
+            <PropertyRef Name="IdTech" />
+          </Key>
+          <Property Name="IdTech" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Formulair__IdCli__6383C8BA">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formulair__IdEqu__6477ECF3">
+          <End Role="Equipement" Type="Self.Equipement" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipement">
+              <PropertyRef Name="IdEquipm" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdEquipm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formulair__IdTec__628FA481">
+          <End Role="Technicien" Type="Self.Technicien" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technicien">
+              <PropertyRef Name="IdTech" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdTech" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DevTestTXModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipement" EntityType="Self.Equipement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formulaire" EntityType="Self.Formulaire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Technicien" EntityType="Self.Technicien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Formulair__IdCli__6383C8BA" Association="Self.FK__Formulair__IdCli__6383C8BA">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formulair__IdEqu__6477ECF3" Association="Self.FK__Formulair__IdEqu__6477ECF3">
+            <End Role="Equipement" EntitySet="Equipement" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formulair__IdTec__628FA481" Association="Self.FK__Formulair__IdTec__628FA481">
+            <End Role="Technicien" EntitySet="Technicien" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DevTestTXModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdCli__6383C8BA" FromRole="Client" ToRole="Formulaire" />
+        </EntityType>
+        <EntityType Name="Equipement">
+          <Key>
+            <PropertyRef Name="IdEquipm" />
+          </Key>
+          <Property Name="IdEquipm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeEquipm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prix" Type="Int32" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdEqu__6477ECF3" FromRole="Equipement" ToRole="Formulaire" />
+        </EntityType>
+        <EntityType Name="Formulaire">
+          <Key>
+            <PropertyRef Name="IdForm" />
+          </Key>
+          <Property Name="IdForm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeMaintenance" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateAjout" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdTech" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdEquipm" Type="Int32" Nullable="false" />
+          <Property Name="temps_min_" Type="Int32" />
+          <Property Name="Prix" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Formulair__IdCli__6383C8BA" FromRole="Formulaire" ToRole="Client" />
+          <NavigationProperty Name="Equipement" Relationship="Self.FK__Formulair__IdEqu__6477ECF3" FromRole="Formulaire" ToRole="Equipement" />
+          <NavigationProperty Name="Technicien" Relationship="Self.FK__Formulair__IdTec__628FA481" FromRole="Formulaire" ToRole="Technicien" />
+        </EntityType>
+        <EntityType Name="Technicien">
+          <Key>
+            <PropertyRef Name="IdTech" />
+          </Key>
+          <Property Name="IdTech" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdTec__628FA481" FromRole="Technicien" ToRole="Formulaire" />
+        </EntityType>
+        <Association Name="FK__Formulair__IdCli__6383C8BA">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formulair__IdEqu__6477ECF3">
+          <End Role="Equipement" Type="Self.Equipement" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipement">
+              <PropertyRef Name="IdEquipm" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdEquipm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formulair__IdTec__628FA481">
+          <End Role="Technicien" Type="Self.Technicien" Multiplicity="1" />
+          <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technicien">
+              <PropertyRef Name="IdTech" />
+            </Principal>
+            <Dependent Role="Formulaire">
+              <PropertyRef Name="IdTech" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DevTestTXEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Equipement" EntityType="Self.Equipement" />
+          <EntitySet Name="Formulaire" EntityType="Self.Formulaire" />
+          <EntitySet Name="Technicien" EntityType="Self.Technicien" />
+          <AssociationSet Name="FK__Formulair__IdCli__6383C8BA" Association="Self.FK__Formulair__IdCli__6383C8BA">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formulair__IdEqu__6477ECF3" Association="Self.FK__Formulair__IdEqu__6477ECF3">
+            <End Role="Equipement" EntitySet="Equipement" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formulair__IdTec__628FA481" Association="Self.FK__Formulair__IdTec__628FA481">
+            <End Role="Technicien" EntitySet="Technicien" />
+            <End Role="Formulaire" EntitySet="Formulaire" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DevTestTXModelStoreContainer" CdmEntityContainer="DevTestTXEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="DevTestTXModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipement">
+            <EntityTypeMapping TypeName="DevTestTXModel.Equipement">
+              <MappingFragment StoreEntitySet="Equipement">
+                <ScalarProperty Name="IdEquipm" ColumnName="IdEquipm" />
+                <ScalarProperty Name="TypeEquipm" ColumnName="TypeEquipm" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formulaire">
+            <EntityTypeMapping TypeName="DevTestTXModel.Formulaire">
+              <MappingFragment StoreEntitySet="Formulaire">
+                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
+                <ScalarProperty Name="TypeMaintenance" ColumnName="TypeMaintenance" />
+                <ScalarProperty Name="DateAjout" ColumnName="DateAjout" />
+                <ScalarProperty Name="IdTech" ColumnName="IdTech" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdEquipm" ColumnName="IdEquipm" />
+                <ScalarProperty Name="temps_min_" ColumnName="temps(min)" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Technicien">
+            <EntityTypeMapping TypeName="DevTestTXModel.Technicien">
+              <MappingFragment StoreEntitySet="Technicien">
+                <ScalarProperty Name="IdTech" ColumnName="IdTech" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

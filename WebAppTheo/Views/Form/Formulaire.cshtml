@@ -1,0 +1,111 @@
+﻿@model WebAppTheo.Models.Formulaire
+
+@{
+    ViewBag.Title = "Formulaire";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+<form name="form1" id="form1" action="" method="post">
+
+    <label for="TypeEquipm">Type de transport</label>
+    <select name="TypeEquipm" id="TypeEquipm" class="form-control">
+        <option value="" selected="selected">Sélectionner</option>
+    </select>
+    <br><br>
+    <label for="Maintenance">Type de Maintenance</label>
+    <select name="Maintenance" id="Maintenance" class="form-control">
+        <option value="" selected="selected">Sélectionner</option>
+    </select>
+    <br><br>
+
+    <label for="EquipementPlus">Equipement à réparer</label>
+    <select name="EquipementPlus" id="EquipementPlus" class="multiple-select one" data-placeholder="Select" multiple>
+        <option value="1">First</option>
+        <option value="2">Second</option>
+        <option value="3">Third</option>
+        <option value="4">Fourth</option>
+    </select>
+    
+
+    <br><br>
+    <label for="InfoClient">Client</label>
+    <select name="InfoClient" id="InfoClient" class="form-control">
+        <option value="" selected="selected">Sélectionner un client</option>
+        @foreach (var data in ViewBag.listeClient)
+        {
+            <option value="@data.IdClient">@data.Prenom @data.Nom</option>
+        }
+    </select>
+    <br><br>
+    <div class="form-group">
+        <label for="InputNameTech">Nom du technicien</label>
+        <input type="text" class="form-control" id="InputNameTech" aria-describedby="emailHelp" placeholder="">
+    </div>
+
+    <div class="form-group">
+        <label for="TempsEsti">Temps estimé</label>
+        <input type="number" class="form-control" id="TempsEsti" placeholder="">
+    </div>
+
+    <br><br>
+    <input type="submit" value="Submit" class="btn btn-secondary">
+</form>
+
+
+<script>
+
+    $('.multiple-select.one').multipleSelect();
+
+    let tempMultipleSelect = $.fn.multipleSelect;
+    $.fn.multipleSelect = function () {
+        this.removeAttr('multiple');    //remove attribute as per your logic
+        return tempMultipleSelect.apply(this, arguments);
+    }
+
+    $('.multiple-select.two').multipleSelect();
+
+</script>
+
+<script>
+    var subjectObject = {
+        "Vélo": {
+            "Révision": [],
+            "Réparation": ["Roue", "Cable de frein"]
+        },
+        "Ski": {
+            "Révision": [],
+            "Réparation": ["Fixation complète", "Semelle"]
+        }
+    }
+    window.onload = function () {
+        var subjectSel = document.getElementById("TypeEquipm");
+        var topicSel = document.getElementById("Maintenance");
+        var chapterSel = document.getElementById("EquipementPlus");
+        for (var x in subjectObject) {
+            subjectSel.options[subjectSel.options.length] = new Option(x, x);
+        }
+        subjectSel.onchange = function () {
+            //empty Chapters- and Topics- dropdowns
+            chapterSel.length = 1;
+            topicSel.length = 1;
+            //display correct values
+            for (var y in subjectObject[this.value]) {
+                topicSel.options[topicSel.options.length] = new Option(y, y);
+            }
+        }
+        topicSel.onchange = function () {
+            //empty Chapters dropdown
+            chapterSel.length = 1;
+            //display correct values
+            var z = subjectObject[subjectSel.value][this.value];
+            for (var i = 0; i < z.length; i++) {
+                chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+            }
+        }
+    }
+</script>
