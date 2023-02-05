@@ -13,10 +13,10 @@ namespace WebAppTheo.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DevTestTXEntities : DbContext
+    public partial class DevTestTXEntities1 : DbContext
     {
-        public DevTestTXEntities()
-            : base("name=DevTestTXEntities")
+        public DevTestTXEntities1()
+            : base("name=DevTestTXEntities1")
         {
         }
     

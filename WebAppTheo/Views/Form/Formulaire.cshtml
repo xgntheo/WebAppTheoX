@@ -7,57 +7,133 @@
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
-
 
 <form name="form1" id="form1" action="" method="post">
 
-    <label for="TypeEquipm">Type de transport</label>
-    <select name="TypeEquipm" id="TypeEquipm" class="form-control">
-        <option value="" selected="selected">Sélectionner</option>
+    <label for="IdEquipm">Type de transport</label>
+    <select name="IdEquipm" value="" id="IdEquipm" class="form-control">
+        <option value="" selected disabled>Sélectionner</option>
+        <option value="2">Vélo</option>
+        <option value="3">Ski</option>
     </select>
     <br><br>
-    <label for="Maintenance">Type de Maintenance</label>
-    <select name="Maintenance" id="Maintenance" class="form-control">
-        <option value="" selected="selected">Sélectionner</option>
+    <label for="TypeMaintenance">Type de Maintenance</label>
+    <select name="TypeMaintenance" value="" id="TypeMaintenance" class="form-control">
+        <option value="" selected disabled>Sélectionner</option>
+        <option value="Révision">Révision</option>
+        <option value="Réparation">Réparation</option>
     </select>
     <br><br>
 
-    <label for="EquipementPlus">Equipement à réparer</label>
-    <select name="EquipementPlus" id="EquipementPlus" class="multiple-select one" data-placeholder="Select" multiple>
-        <option value="1">First</option>
-        <option value="2">Second</option>
-        <option value="3">Third</option>
-        <option value="4">Fourth</option>
+    <label for="ReparationDiverse">Equipement à réparer</label>
+    <select name="ReparationDiverse" value="" id="ReparationDiverse" class="form-control" data-placeholder="Select">
+        <option value="" selected disabled>Sélectionner</option>
+        <option value="Pneu/Câble de frein">Pneu/Câble de frein</option>
+        <option value="Pneu">Pneu</option>
+        <option value="Câble de frein">Câble de frein</option>
+        <option value="Fixation complète/Semelle">Fixation complète/Semelle</option>
+        <option value="Fixation complète">Fixation complète</option>
+        <option value="Semelle">Semelle</option>
     </select>
-    
+
 
     <br><br>
-    <label for="InfoClient">Client</label>
-    <select name="InfoClient" id="InfoClient" class="form-control">
-        <option value="" selected="selected">Sélectionner un client</option>
+    <label for="IdClient">Client</label>
+    <select name="IdClient" id="IdClient" class="form-control">
+        <option value="" selected disabled>Sélectionner un client</option>
         @foreach (var data in ViewBag.listeClient)
         {
-            <option value="@data.IdClient">@data.Prenom @data.Nom</option>
+            <option value="@data.IdClient">@data.PrenomClient @data.NomClient</option>
         }
     </select>
     <br><br>
-    <div class="form-group">
-        <label for="InputNameTech">Nom du technicien</label>
-        <input type="text" class="form-control" id="InputNameTech" aria-describedby="emailHelp" placeholder="">
-    </div>
+        <div class="form-group">
+            <label for="IdTech">Technicien</label>
+            <select name="IdTech" id="IdTech" class="form-control">
+                <option value="" selected disabled>Sélectionner un technicien</option>
+                @foreach (var data in ViewBag.listeTechnicien)
+                {
+                    <option value="@data.IdTech">@data.NomTechn</option>
+                }
+            </select>
+        </div>
+
+    <br>
 
     <div class="form-group">
-        <label for="TempsEsti">Temps estimé</label>
-        <input type="number" class="form-control" id="TempsEsti" placeholder="">
+        <label for="TempsMinute">Temps estimé</label>
+        <input type="number" value="" name="TempsMinute" class="form-control" id="TempsMinute" placeholder="">
     </div>
 
     <br><br>
     <input type="submit" value="Submit" class="btn btn-secondary">
 </form>
 
+<br>
+<br>
 
-<script>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">N° de l'équipement</th>
+            <th scope="col">Type d'équipement</th>
+            <th scope="col">Client</th>
+            <th scope="col">Technicien</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var data in ViewBag.listFormulaire)
+        {
+            <tr>
+                <td>@data.IdEquipm</td>
+                @foreach(var dataEquipm in ViewBag.listeEquipement)
+                {
+                    if(data.IdEquipm == dataEquipm.IdEquipm)
+                    {
+                        <td>@dataEquipm.NomEquipm</td>
+                        break;
+                    }
+                }
+
+                @foreach (var dataClient in ViewBag.listeClient)
+                {
+                    if (data.IdClient == dataClient.IdClient)
+                    {
+                        <td>
+                            <ul>
+                                <li>@dataClient.NomClient @dataClient.PrenomClient</li>
+                                <li>Email: @dataClient.Mail</li>
+                                <li>Téléphone @dataClient.Telephone</li>
+                            </ul>
+                        </td>
+                        break;
+                    }
+
+                }
+
+                @foreach (var dataTechnicien in ViewBag.listeTechnicien)
+                {
+                    if (data.IdTech == dataTechnicien.IdTech)
+                    {
+                        <td>@dataTechnicien.NomTechn</td>
+                        break;
+                    }
+                }
+
+                <td>@data.Prix</td>
+                <td>@data.TempsMinute</td>
+                <td>@data.DateAjout</td>
+            </tr>
+        }
+
+    </tbody>
+    </table>
+
+@*<script>
 
     $('.multiple-select.one').multipleSelect();
 
@@ -108,4 +184,4 @@
             }
         }
     }
-</script>
+</script>*@

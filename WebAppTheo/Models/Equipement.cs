@@ -21,8 +21,7 @@ namespace WebAppTheo.Models
         }
     
         public int IdEquipm { get; set; }
-        public string TypeEquipm { get; set; }
-        public Nullable<int> Prix { get; set; }
+        public string NomEquipm { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Formulaire> Formulaire { get; set; }

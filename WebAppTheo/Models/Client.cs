@@ -21,10 +21,10 @@ namespace WebAppTheo.Models
         }
     
         public int IdClient { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
+        public string NomClient { get; set; }
+        public string PrenomClient { get; set; }
         public string Mail { get; set; }
-        public int Telephone { get; set; }
+        public Nullable<int> Telephone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Formulaire> Formulaire { get; set; }

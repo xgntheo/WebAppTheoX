@@ -10,30 +10,30 @@
             <PropertyRef Name="IdClient" />
           </Key>
           <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Telephone" Type="int" Nullable="false" />
+          <Property Name="NomClient" Type="varchar" MaxLength="50" />
+          <Property Name="PrenomClient" Type="varchar" MaxLength="50" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="int" />
         </EntityType>
         <EntityType Name="Equipement">
           <Key>
             <PropertyRef Name="IdEquipm" />
           </Key>
           <Property Name="IdEquipm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeEquipm" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Prix" Type="int" />
+          <Property Name="NomEquipm" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Formulaire">
           <Key>
             <PropertyRef Name="IdForm" />
           </Key>
           <Property Name="IdForm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeMaintenance" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="DateAjout" Type="datetime" Nullable="false" />
-          <Property Name="IdTech" Type="int" Nullable="false" />
-          <Property Name="IdClient" Type="int" Nullable="false" />
           <Property Name="IdEquipm" Type="int" Nullable="false" />
-          <Property Name="temps(min)" Type="int" />
+          <Property Name="TypeMaintenance" Type="varchar" MaxLength="50" />
+          <Property Name="ReparationDiverse" Type="varchar" MaxLength="50" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdTech" Type="int" Nullable="false" />
+          <Property Name="TempsMinute" Type="int" />
+          <Property Name="DateAjout" Type="datetime" />
           <Property Name="Prix" Type="int" />
         </EntityType>
         <EntityType Name="Technicien">
@@ -41,9 +41,9 @@
             <PropertyRef Name="IdTech" />
           </Key>
           <Property Name="IdTech" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomTechn" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Formulair__IdCli__6383C8BA">
+        <Association Name="FK__Formulair__IdCli__7B5B524B">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -55,7 +55,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Formulair__IdEqu__6477ECF3">
+        <Association Name="FK__Formulair__IdEqu__7A672E12">
           <End Role="Equipement" Type="Self.Equipement" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -67,7 +67,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Formulair__IdTec__628FA481">
+        <Association Name="FK__Formulair__IdTec__7C4F7684">
           <End Role="Technicien" Type="Self.Technicien" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -84,15 +84,15 @@
           <EntitySet Name="Equipement" EntityType="Self.Equipement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formulaire" EntityType="Self.Formulaire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Technicien" EntityType="Self.Technicien" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Formulair__IdCli__6383C8BA" Association="Self.FK__Formulair__IdCli__6383C8BA">
+          <AssociationSet Name="FK__Formulair__IdCli__7B5B524B" Association="Self.FK__Formulair__IdCli__7B5B524B">
             <End Role="Client" EntitySet="Client" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
-          <AssociationSet Name="FK__Formulair__IdEqu__6477ECF3" Association="Self.FK__Formulair__IdEqu__6477ECF3">
+          <AssociationSet Name="FK__Formulair__IdEqu__7A672E12" Association="Self.FK__Formulair__IdEqu__7A672E12">
             <End Role="Equipement" EntitySet="Equipement" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
-          <AssociationSet Name="FK__Formulair__IdTec__628FA481" Association="Self.FK__Formulair__IdTec__628FA481">
+          <AssociationSet Name="FK__Formulair__IdTec__7C4F7684" Association="Self.FK__Formulair__IdTec__7C4F7684">
             <End Role="Technicien" EntitySet="Technicien" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
@@ -107,46 +107,46 @@
             <PropertyRef Name="IdClient" />
           </Key>
           <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Telephone" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdCli__6383C8BA" FromRole="Client" ToRole="Formulaire" />
+          <Property Name="NomClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PrenomClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="Int32" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdCli__7B5B524B" FromRole="Client" ToRole="Formulaire" />
         </EntityType>
         <EntityType Name="Equipement">
           <Key>
             <PropertyRef Name="IdEquipm" />
           </Key>
           <Property Name="IdEquipm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeEquipm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prix" Type="Int32" />
-          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdEqu__6477ECF3" FromRole="Equipement" ToRole="Formulaire" />
+          <Property Name="NomEquipm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdEqu__7A672E12" FromRole="Equipement" ToRole="Formulaire" />
         </EntityType>
         <EntityType Name="Formulaire">
           <Key>
             <PropertyRef Name="IdForm" />
           </Key>
           <Property Name="IdForm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TypeMaintenance" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DateAjout" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdTech" Type="Int32" Nullable="false" />
-          <Property Name="IdClient" Type="Int32" Nullable="false" />
           <Property Name="IdEquipm" Type="Int32" Nullable="false" />
-          <Property Name="temps_min_" Type="Int32" />
+          <Property Name="TypeMaintenance" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReparationDiverse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdTech" Type="Int32" Nullable="false" />
+          <Property Name="TempsMinute" Type="Int32" />
+          <Property Name="DateAjout" Type="DateTime" Precision="3" />
           <Property Name="Prix" Type="Int32" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__Formulair__IdCli__6383C8BA" FromRole="Formulaire" ToRole="Client" />
-          <NavigationProperty Name="Equipement" Relationship="Self.FK__Formulair__IdEqu__6477ECF3" FromRole="Formulaire" ToRole="Equipement" />
-          <NavigationProperty Name="Technicien" Relationship="Self.FK__Formulair__IdTec__628FA481" FromRole="Formulaire" ToRole="Technicien" />
+          <NavigationProperty Name="Client" Relationship="Self.FK__Formulair__IdCli__7B5B524B" FromRole="Formulaire" ToRole="Client" />
+          <NavigationProperty Name="Equipement" Relationship="Self.FK__Formulair__IdEqu__7A672E12" FromRole="Formulaire" ToRole="Equipement" />
+          <NavigationProperty Name="Technicien" Relationship="Self.FK__Formulair__IdTec__7C4F7684" FromRole="Formulaire" ToRole="Technicien" />
         </EntityType>
         <EntityType Name="Technicien">
           <Key>
             <PropertyRef Name="IdTech" />
           </Key>
           <Property Name="IdTech" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdTec__628FA481" FromRole="Technicien" ToRole="Formulaire" />
+          <Property Name="NomTechn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Formulaire" Relationship="Self.FK__Formulair__IdTec__7C4F7684" FromRole="Technicien" ToRole="Formulaire" />
         </EntityType>
-        <Association Name="FK__Formulair__IdCli__6383C8BA">
+        <Association Name="FK__Formulair__IdCli__7B5B524B">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Formulair__IdEqu__6477ECF3">
+        <Association Name="FK__Formulair__IdEqu__7A672E12">
           <End Role="Equipement" Type="Self.Equipement" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +170,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Formulair__IdTec__628FA481">
+        <Association Name="FK__Formulair__IdTec__7C4F7684">
           <End Role="Technicien" Type="Self.Technicien" Multiplicity="1" />
           <End Role="Formulaire" Type="Self.Formulaire" Multiplicity="*" />
           <ReferentialConstraint>
@@ -182,20 +182,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DevTestTXEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DevTestTXEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Equipement" EntityType="Self.Equipement" />
           <EntitySet Name="Formulaire" EntityType="Self.Formulaire" />
           <EntitySet Name="Technicien" EntityType="Self.Technicien" />
-          <AssociationSet Name="FK__Formulair__IdCli__6383C8BA" Association="Self.FK__Formulair__IdCli__6383C8BA">
+          <AssociationSet Name="FK__Formulair__IdCli__7B5B524B" Association="Self.FK__Formulair__IdCli__7B5B524B">
             <End Role="Client" EntitySet="Client" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
-          <AssociationSet Name="FK__Formulair__IdEqu__6477ECF3" Association="Self.FK__Formulair__IdEqu__6477ECF3">
+          <AssociationSet Name="FK__Formulair__IdEqu__7A672E12" Association="Self.FK__Formulair__IdEqu__7A672E12">
             <End Role="Equipement" EntitySet="Equipement" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
-          <AssociationSet Name="FK__Formulair__IdTec__628FA481" Association="Self.FK__Formulair__IdTec__628FA481">
+          <AssociationSet Name="FK__Formulair__IdTec__7C4F7684" Association="Self.FK__Formulair__IdTec__7C4F7684">
             <End Role="Technicien" EntitySet="Technicien" />
             <End Role="Formulaire" EntitySet="Formulaire" />
           </AssociationSet>
@@ -205,13 +205,13 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DevTestTXModelStoreContainer" CdmEntityContainer="DevTestTXEntities">
+        <EntityContainerMapping StorageEntityContainer="DevTestTXModelStoreContainer" CdmEntityContainer="DevTestTXEntities1">
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="DevTestTXModel.Client">
               <MappingFragment StoreEntitySet="Client">
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="PrenomClient" ColumnName="PrenomClient" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
               </MappingFragment>
@@ -221,8 +221,7 @@
             <EntityTypeMapping TypeName="DevTestTXModel.Equipement">
               <MappingFragment StoreEntitySet="Equipement">
                 <ScalarProperty Name="IdEquipm" ColumnName="IdEquipm" />
-                <ScalarProperty Name="TypeEquipm" ColumnName="TypeEquipm" />
-                <ScalarProperty Name="Prix" ColumnName="Prix" />
+                <ScalarProperty Name="NomEquipm" ColumnName="NomEquipm" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -230,12 +229,13 @@
             <EntityTypeMapping TypeName="DevTestTXModel.Formulaire">
               <MappingFragment StoreEntitySet="Formulaire">
                 <ScalarProperty Name="IdForm" ColumnName="IdForm" />
-                <ScalarProperty Name="TypeMaintenance" ColumnName="TypeMaintenance" />
-                <ScalarProperty Name="DateAjout" ColumnName="DateAjout" />
-                <ScalarProperty Name="IdTech" ColumnName="IdTech" />
-                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="IdEquipm" ColumnName="IdEquipm" />
-                <ScalarProperty Name="temps_min_" ColumnName="temps(min)" />
+                <ScalarProperty Name="TypeMaintenance" ColumnName="TypeMaintenance" />
+                <ScalarProperty Name="ReparationDiverse" ColumnName="ReparationDiverse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdTech" ColumnName="IdTech" />
+                <ScalarProperty Name="TempsMinute" ColumnName="TempsMinute" />
+                <ScalarProperty Name="DateAjout" ColumnName="DateAjout" />
                 <ScalarProperty Name="Prix" ColumnName="Prix" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -244,7 +244,7 @@
             <EntityTypeMapping TypeName="DevTestTXModel.Technicien">
               <MappingFragment StoreEntitySet="Technicien">
                 <ScalarProperty Name="IdTech" ColumnName="IdTech" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="NomTechn" ColumnName="NomTechn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

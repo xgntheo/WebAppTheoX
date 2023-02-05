@@ -15,12 +15,13 @@ namespace WebAppTheo.Models
     public partial class Formulaire
     {
         public int IdForm { get; set; }
-        public string TypeMaintenance { get; set; }
-        public System.DateTime DateAjout { get; set; }
-        public int IdTech { get; set; }
-        public int IdClient { get; set; }
         public int IdEquipm { get; set; }
-        public Nullable<int> temps_min_ { get; set; }
+        public string TypeMaintenance { get; set; }
+        public string ReparationDiverse { get; set; }
+        public int IdClient { get; set; }
+        public int IdTech { get; set; }
+        public Nullable<int> TempsMinute { get; set; }
+        public Nullable<System.DateTime> DateAjout { get; set; }
         public Nullable<int> Prix { get; set; }
     
         public virtual Client Client { get; set; }
