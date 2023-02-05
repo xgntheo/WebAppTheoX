@@ -21,7 +21,6 @@ namespace WebAppTheo.Controllers
         {
             try
             {
-                ViewBag.Message = "Entrer les informations de maintenance";
 
                 ViewBag.listeEquipement = db.Equipement.ToList();
                 ViewBag.listeTechnicien = db.Technicien.ToList();
@@ -59,60 +58,60 @@ namespace WebAppTheo.Controllers
                 form.IdEquipm = equipm.IdEquipm;
             }
 
-            //try
-            //{
-            if (ModelState.IsValid)
+            try
             {
-                if(equipm.NomEquipm == "Vélo")//ID Vélo
+                if (ModelState.IsValid)
                 {
+                    if(equipm.NomEquipm == "Vélo")//ID Vélo
+                    {
                     
 
-                    if (form.TypeMaintenance == "Révision")//Révision
-                    {
-                        form.TempsMinute = 45;
-                        form.Prix = 50;
+                        if (form.TypeMaintenance == "Révision")//Révision
+                        {
+                            form.TempsMinute = 45;
+                            form.Prix = 50;
+                        }
+                        else if(form.TypeMaintenance == "Réparation")//Réparation perso
+                        {
+                            if (form.ReparationDiverse == "Pneu/Câble de frein")
+                            {
+                                form.Prix = (form.TempsMinute * 1) + 30 + 15;
+                            }
+                            else if (form.ReparationDiverse == "Pneu")
+                            {
+                                form.Prix = (form.TempsMinute * 1) + 30;
+                            }
+                            else if (form.ReparationDiverse == "Câble de frein")
+                            {
+                                form.Prix = (form.TempsMinute * 1) + 15;
+                            }
+                        }
                     }
-                    else if(form.TypeMaintenance == "Réparation")//Réparation perso
+                    else if (equipm.NomEquipm == "Ski")//ID Ski
                     {
-                        if (form.ReparationDiverse == "Pneu/Câble de frein")
-                        {
-                            form.Prix = (form.TempsMinute * 1) + 30 + 15;
-                        }
-                        else if (form.ReparationDiverse == "Pneu")
-                        {
-                            form.Prix = (form.TempsMinute * 1) + 30;
-                        }
-                        else if (form.ReparationDiverse == "Câble de frein")
-                        {
-                            form.Prix = (form.TempsMinute * 1) + 15;
-                        }
-                    }
-                }
-                else if (equipm.NomEquipm == "Ski")//ID Ski
-                {
-                    //form.IdEquipm = equipm.IdEquipm; //??
+                        //form.IdEquipm = equipm.IdEquipm; //??
 
-                    if (form.TypeMaintenance == "Révision")//Revision
-                    {
-                        form.TempsMinute = 15;
-                        form.Prix = 20;
+                        if (form.TypeMaintenance == "Révision")//Revision
+                        {
+                            form.TempsMinute = 15;
+                            form.Prix = 20;
+                        }
+                        else if (form.TypeMaintenance == "Réparation")//Réparation perso
+                        {
+                            if (form.ReparationDiverse == "Fixation complète/Semelle")
+                            {
+                                form.Prix = (form.TempsMinute * 1) +50 + 20;
+                            }
+                            else if (form.ReparationDiverse == "Fixation complète")
+                            {
+                                form.Prix = (form.TempsMinute * 1) + 50;
+                            }
+                            else if (form.ReparationDiverse == "Semelle")
+                            {
+                                form.Prix = (form.TempsMinute * 1) + 20;
+                            }
+                        }
                     }
-                    else if (form.TypeMaintenance == "Réparation")//Réparation perso
-                    {
-                        if (form.ReparationDiverse == "Fixation complète/Semelle")
-                        {
-                            form.Prix = (form.TempsMinute * 1) +50 + 20;
-                        }
-                        else if (form.ReparationDiverse == "Fixation complète")
-                        {
-                            form.Prix = (form.TempsMinute * 1) + 50;
-                        }
-                        else if (form.ReparationDiverse == "Semelle")
-                        {
-                            form.Prix = (form.TempsMinute * 1) + 20;
-                        }
-                    }
-                }
 
                 form.DateAjout = DateTime.Now;
                 db.Formulaire.Add(form);
@@ -120,13 +119,13 @@ namespace WebAppTheo.Controllers
             }
 
             return RedirectToAction("Formulaire");
-            //}
-            //catch
-            //{
+            }
+            catch
+            {
 
-            //    return HttpNotFound();
+                return HttpNotFound();
 
-            //}
+            }
 
         }
 
